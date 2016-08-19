@@ -1,0 +1,257 @@
+//Find if hand in pinch position (Thumb tip close to one of other finger joints)
+//If RigidBody is nearby, hold object relative to where hand is
+
+using UnityEngine;
+using Leap;
+using System.Collections.Generic;
+using Leap.Unity;
+
+public class PinchAndHold : MonoBehaviour
+{
+
+    Controller control;
+    //const float PINCH_DIST = 100.0f;
+    //const float SPRING_CONST = 3000.0f;
+    //const float THUMB_TRIGGER_DISTANCE = 12.0f;
+    private int layerMask;
+    GameObject grabbed; //for left hand holds
+    GameObject grabbed2; //for right hand holds
+    //public float speed = 5.0f;
+
+    bool isPinching = false;
+    bool leftHandHold = false;
+    bool rightHandHold = false;
+
+    // Use this for initialization
+    void Start()
+    {
+        control = new Controller();
+        grabbed = null;
+        grabbed2 = null;
+        layerMask = 1 << 11;
+        layerMask = ~layerMask;
+        Debug.Log("Running");
+    }
+
+
+    GameObject Hold(Vector3 pos, bool left, bool right) //find nearest object within Player's bubble
+    {
+        GameObject obj = null; //local
+        bool objFound = false;
+        //REQUIRES VECTOR 3, converted from earlier
+        GameObject[] nearby = GameObject.FindGameObjectsWithTag("CanGrab"); //list of objects with tag
+        float old_dist = 300f;
+
+        for (int count = 0; count < nearby.Length; count++)
+        {
+            if (grabbed != null || grabbed2 != null)
+            {
+                count++;
+            }
+
+            float new_dist = Vector3.Distance(nearby[count].transform.position, pos);
+            Debug.Log(new_dist);
+            if (nearby[count].GetComponent<Rigidbody>().tag == "CanGrab" && new_dist < old_dist)
+            {
+                old_dist = new_dist;
+                obj = nearby[count];
+                objFound = true;
+                Debug.Log(old_dist);
+            }
+        }
+
+        if (objFound)
+        {
+            Debug.Log("Object FOUND");
+            return obj;
+        }
+        else
+        {
+            Debug.Log("Nothing FOUND");
+            return null;
+        }
+    }
+
+    void setGrabbed(GameObject obj)
+    {
+        grabbed = obj;
+    }
+
+    void setGrabbed2(GameObject obj2)
+    {
+        grabbed2 = obj2;
+    }
+    GameObject getGrabbed()
+    {
+        return grabbed;
+    }
+    GameObject getGrabbed2()
+    {
+        return grabbed2;
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        Frame currentFrame = control.Frame();
+
+        //Vector3 LDist;
+        //Vector3 RDist;
+
+        //if (control.IsConnected) { //if Controller connected, get data from current and previous frame
+        //   currentFrame = control.Frame();
+        //}
+
+
+        if (currentFrame.Hands.Count > 1)
+        { //if both hands present in frame
+
+            List<Hand> hands = currentFrame.Hands;
+
+
+            //assign left and right hands
+            Hand leftHand = hands[0];
+            Hand rightHand = hands[1];
+
+            //list of fingers in right and left hands
+            //List<Finger> fingLefts = leftHand.Fingers;
+            //List<Finger> fingRights = rightHand.Fingers;
+
+            Vector3 palmLeft = hands[0].PalmPosition.ToVector3(); //position of left hand palm
+            Vector3 palmRight = hands[1].PalmPosition.ToVector3(); //position of right hand palm
+
+            //for (int fingCount = 1; fingCount < 5 && !isPinching; ++fingCount) { //check if a finger close enough to corresponding thumb
+
+            //Old Method of checking Pinching
+            /*
+            Vector thumbLeft = fingLefts[0].TipPosition; //left thumb position
+            Vector thumbRight = fingRights[0].TipPosition; //right thumb position
+
+            Vector posLeft = fingLefts[1].TipPosition; //index finger of left hand
+            Vector posRight = fingRights[1].TipPosition; //index finger of right hand
+
+            float leftDistance = Vector3.Distance(posLeft.ToVector3(), thumbLeft.ToVector3()); //distance from left index finger to left thumb
+            float rightDistance = Vector3.Distance(posRight.ToVector3(), thumbRight.ToVector3()); //distance from right index finger to right thumb
+
+            Debug.Log("Left Distance: " + leftDistance);
+            Debug.Log("Right Distance: " + rightDistance);
+            */
+
+            float pinchLeft = leftHand.PinchStrength;
+            float pinchRight = rightHand.PinchStrength;
+
+            //if (leftDistance < THUMB_TRIGGER_DISTANCE && rightDistance < THUMB_TRIGGER_DISTANCE) { //both right and left hands are pinched
+            if (pinchLeft >= 0.7 && pinchRight >= 0.7)
+            {
+
+                //Debug.Log("BOTH HOLDING");
+
+                isPinching = true;
+                leftHandHold = true;
+                rightHandHold = true;
+                //LDist = leftDistance.ToVector3();
+                //RDist = rightDistance.ToVector3();
+                setGrabbed(Hold(palmLeft, leftHandHold, rightHandHold));
+                setGrabbed2(Hold(palmRight, leftHandHold, rightHandHold));
+
+                //fingCount = 5;
+            }
+            else if (pinchLeft >= 0.7)
+            { //only left hand pinched
+
+                //Debug.Log("LEFT HOLDING");
+
+                isPinching = true;
+                leftHandHold = true;
+                rightHandHold = false;
+                //LDist = leftDistance.ToVector3();
+                setGrabbed(Hold(palmLeft, leftHandHold, rightHandHold));
+
+                //fingCount = 5;
+            }
+            else if (pinchRight >= 0.7)
+            { //only right hand pinched
+
+                //Debug.Log("RIGHT HOLDING");
+
+                isPinching = true;
+                rightHandHold = true;
+                leftHandHold = false;
+
+                //RDist = rightDistance.ToVector3();
+                setGrabbed2(Hold(palmRight, leftHandHold, rightHandHold));
+
+                //fingCount = 5;
+            }
+            else
+            { //no hands in pinching position
+                //Debug.Log("None pinching");
+                isPinching = false;
+                leftHandHold = false;
+                rightHandHold = false;
+            }
+
+
+            if (!isPinching && grabbed != null)
+            {//not pinching anymore but holding object in left hand
+             //Vector3 floor = grabbed.transform.position;
+             //grabbed.transform.position = Vector3.MoveTowards(grabbed.transform.position, )
+
+                grabbed.GetComponent<Rigidbody>().isKinematic = false;
+                grabbed.GetComponent<Rigidbody>().useGravity = true;
+                setGrabbed(null);
+
+            }
+
+            if (!isPinching && grabbed2 != null)
+            {//not pinching anymore but holding object in right hand
+
+
+                grabbed2.GetComponent<Rigidbody>().isKinematic = false;
+                grabbed2.GetComponent<Rigidbody>().useGravity = true;
+                setGrabbed2(null);
+            }
+
+
+            if (grabbed != null)
+            { //holding something in left hand, move object to palm position
+              //float distToObj = Vector3.Distance(palmLeft, grabbed.transform.position);
+              //float step = distToObj * SPRING_CONST;
+
+
+                grabbed.GetComponent<Rigidbody>().isKinematic = true;
+                grabbed.GetComponent<Rigidbody>().useGravity = false;
+
+
+                //transform from millimeters to meters
+                Vector3 left = new Vector3((palmLeft.x / -1000.0f), (palmLeft.z / 1000.0f) + 2, (palmLeft.y / 1000.0f));
+
+                getGrabbed().transform.position = left;
+
+            }
+
+            if (grabbed2 != null)
+            {//holding something in right hand, move object to palm position
+                //float distToObj = Vector3.Distance(palmRight, grabbed2.transform.position);
+                //float step = distToObj * SPRING_CONST;
+
+                grabbed2.GetComponent<Rigidbody>().isKinematic = true;
+                grabbed2.GetComponent<Rigidbody>().useGravity = false;
+
+                //transform from millimeters to meters
+                Vector3 right = new Vector3((palmRight.x / -1000.0f), (palmRight.z / 1000.0f) + 2, (palmRight.y / 1000.0f));
+
+
+                Debug.Log("RightHand" + right);
+
+                getGrabbed2().transform.position = right;
+
+                //grabbed2.GetComponent<Rigidbody>().AddForce(SPRING_CONST * distToObj);
+            }
+        }
+
+
+    }
+}
