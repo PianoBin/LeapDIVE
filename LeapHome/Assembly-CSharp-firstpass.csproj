@@ -138,13 +138,13 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="MiddleVR_dotNet">
- <HintPath>C:/Users/sm588/OneDrive/LeapHome/Assets/MiddleVR/MiddleVR_dotNet.dll</HintPath>
+ <HintPath>C:/Users/sm588/Documents/GitHub/LeapDIVE/LeapHome/Assets/MiddleVR/MiddleVR_dotNet.dll</HintPath>
  </Reference>
  <Reference Include="MiddleVR_Unity3D">
- <HintPath>C:/Users/sm588/OneDrive/LeapHome/Assets/MiddleVR/MiddleVR_Unity3D.dll</HintPath>
+ <HintPath>C:/Users/sm588/Documents/GitHub/LeapDIVE/LeapHome/Assets/MiddleVR/MiddleVR_Unity3D.dll</HintPath>
  </Reference>
  <Reference Include="LeapCSharp.NET3.5">
- <HintPath>C:/Users/sm588/OneDrive/LeapHome/Assets/Plugins/LeapCSharp.NET3.5.dll</HintPath>
+ <HintPath>C:/Users/sm588/Documents/GitHub/LeapDIVE/LeapHome/Assets/Plugins/LeapCSharp.NET3.5.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

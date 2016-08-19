@@ -84,7 +84,7 @@
      <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />
      <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
  <Reference Include="Assembly-UnityScript">
- <HintPath>C:/Users/sm588/OneDrive/LeapHome/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ <HintPath>C:/Users/sm588/Documents/GitHub/LeapDIVE/LeapHome/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -111,13 +111,13 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
  </Reference>
  <Reference Include="MiddleVR_dotNet">
- <HintPath>C:/Users/sm588/OneDrive/LeapHome/Assets/MiddleVR/MiddleVR_dotNet.dll</HintPath>
+ <HintPath>C:/Users/sm588/Documents/GitHub/LeapDIVE/LeapHome/Assets/MiddleVR/MiddleVR_dotNet.dll</HintPath>
  </Reference>
  <Reference Include="MiddleVR_Unity3D">
- <HintPath>C:/Users/sm588/OneDrive/LeapHome/Assets/MiddleVR/MiddleVR_Unity3D.dll</HintPath>
+ <HintPath>C:/Users/sm588/Documents/GitHub/LeapDIVE/LeapHome/Assets/MiddleVR/MiddleVR_Unity3D.dll</HintPath>
  </Reference>
  <Reference Include="LeapCSharp.NET3.5">
- <HintPath>C:/Users/sm588/OneDrive/LeapHome/Assets/Plugins/LeapCSharp.NET3.5.dll</HintPath>
+ <HintPath>C:/Users/sm588/Documents/GitHub/LeapDIVE/LeapHome/Assets/Plugins/LeapCSharp.NET3.5.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
