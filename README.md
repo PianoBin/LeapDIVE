@@ -4,6 +4,24 @@ Leap Motion with a CAVE type system
 Developed at the Duke Virtualization Lab, intended for use in the DIVE
 
 ---
+## Dependent Installations/Plugins:
+* [Oculus Rift PC Runtime](https://www3.oculus.com/en-us/setup/)
+* [Orion SDK](https://developer.leapmotion.com/get-started)
+* [Unity Core Assets V4.1.3](https://developer.leapmotion.com/unity)
+* [MiddleVR for Unity](http://www.middlevr.com/middlevr-for-unity/)
+
+---
+## Assets Used:
+* [AxeyWorks- Low Poly: Free Pack](https://www.assetstore.unity3d.com/en/#!/content/58821)
+* [Rispat Momit- Simple Cloud System](https://www.assetstore.unity3d.com/en/#!/content/6715)
+* [Blacklight- Simple Modular Road Kit](https://www.assetstore.unity3d.com/en/#!/content/66152)
+* [Quadrante Studio- QS Materials Nature - Pack Grass vol.1](https://www.assetstore.unity3d.com/en/#!/content/21113)
+* Standard Assets: Characters, Environment, Vehicles 
+* [Dawn Pt.3 Ambient Mix](https://soundcloud.com/mrsuicidesheep/dawn-pt-3-an-ambient-mix)
+
+
+---
+## Screenshots:
 
 Picking up two objects, one in each hand, by pinching.
 ![Picking up two objects, one in each hand, by pinching.](https://github.com/PianoBin/LeapDIVE/blob/master/Other/Demo.PNG)
