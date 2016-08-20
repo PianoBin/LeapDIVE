@@ -1,7 +1,9 @@
 # LeapDIVE
-Leap Motion with a CAVE type system
+#### Leap Motion with a CAVE type system
 
-Developed at the Duke Virtualization Lab, intended for use in the DIVE
+Developed at the Duke Virtualization Lab, intended for use in the [DIVE](http://virtualreality.duke.edu/about/).
+
+Special thanks to [Dr. Regis Kopper](http://virtualreality.duke.edu/person/regis-kopper-ph-d/) and [David Zielinski](http://virtualreality.duke.edu/person/david-j-zielinski/).
 
 ---
 ## Downloads:
