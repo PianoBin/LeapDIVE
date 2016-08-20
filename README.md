@@ -4,6 +4,10 @@ Leap Motion with a CAVE type system
 Developed at the Duke Virtualization Lab, intended for use in the DIVE
 
 ---
+## Downloads:
+Visit the [Releases tab!](https://github.com/PianoBin/LeapDIVE/releases)
+
+---
 ## Dependent Installations/Plugins:
 * [Oculus Rift PC Runtime](https://www3.oculus.com/en-us/setup/)
 * [Orion SDK](https://developer.leapmotion.com/get-started)
